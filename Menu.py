@@ -49,60 +49,6 @@ display.blit(textSurf, textRect)
 
 
 
-# def telaopcoes():#construindo a segunda tela (opcões da quantidade de jogadores)
-#     display = pygame.display.set_mode([840, 480])
-#     pygame.display.set_caption("Opcões")
-#     display.fill([0, 0, 0])
-#     virusvacina = pygame.image.load('vacina.jpeg')
-#     display.blit(virusvacina, (350, 120))
-#     letras2 = pygame.image.load('opcoes.jpeg')
-#     display.blit(letras2, (-210, -300))
-#
-#     botao1op = pygame.Rect(150, 340, 110, 50)
-#     pygame.draw.rect(display, [36, 128, 20], botao1op)
-#     textobotao = pygame.font.Font('freesansbold.ttf', 18)
-#     textSurf, textRect = text_botoes("1 jogador", textobotao)
-#     textRect.center = ((150 + (110/2)), (340 + (50/2)))
-#     display.blit(textSurf, textRect)
-#
-#     botao2op = pygame.Rect(300, 340, 110, 50)
-#     pygame.draw.rect(display, [36, 128, 20], botao2op)
-#     textobotao = pygame.font.Font('freesansbold.ttf', 18)
-#     textSurf, textRect = text_botoes("2 jogadores", textobotao)
-#     textRect.center = ((300 + (110 / 2)), (340 + (50 / 2)))
-#     display.blit(textSurf, textRect)
-#
-#     botao3op = pygame.Rect(450, 340, 110, 50)
-#     pygame.draw.rect(display, [36, 128, 20], botao3op)
-#     textobotao = pygame.font.Font('freesansbold.ttf', 18)
-#     textSurf, textRect = text_botoes("3 jogadores", textobotao)
-#     textRect.center = ((450 + (110 / 2)), (340 + (50 / 2)))
-#     display.blit(textSurf, textRect)
-#
-#     botao4op = pygame.Rect(600, 340, 110, 50)
-#     pygame.draw.rect(display, [36, 128, 20], botao4op)
-#     textobotao = pygame.font.Font('freesansbold.ttf', 18)
-#     textSurf, textRect = text_botoes("4 jogadores", textobotao)
-#     textRect.center = ((600 + (110 / 2)), (340 + (50 / 2)))
-#     display.blit(textSurf, textRect)
-
-
-    # if botao1op.collidepoint(pygame.mouse.get_pos()):
-    #     print("botao1")
-    #     if pygame.mouse.get_pressed()[0]:
-    #         quantidadejogador(1)
-    # elif botao2op.collidepoint(pygame.mouse.get_pos()):
-    #     print("botao2")
-    #     if pygame.mouse.get_pressed()[0]:
-    #         quantidadejogador(2)
-    # elif botao3op.collidepoint(pygame.mouse.get_pos()):
-    #     if pygame.mouse.get_pressed()[0]:
-    #         quantidadejogador(3)
-    # elif botao4op.collidepoint(pygame.mouse.get_pos()):
-    #     if pygame.mouse.get_pressed()[0]:
-    #         quantidadejogador(4)
-
-
 gameLoop = True
 
 if __name__ == "__main__":
