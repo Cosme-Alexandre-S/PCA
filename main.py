@@ -35,6 +35,10 @@ cartabckground = pygame.image.load(os.path.join("assets", "cartabackground.png")
 badending = pygame.image.load(os.path.join("assets", "badending.png"))
 fundo_aviso = pygame.image.load(os.path.join("assets", "fundoendgame.png"))
 
+#---------- Foco da Camera --------------#
+pos_foco_camera = [int(WIDTH / 2 - BLOCK.get_width() / 2), int(HEIGHT / 2 - BLOCK.get_height() / 2)]
+"""Variável que define as coordenadas do centro da tela levando em consideração o tamanho de um Bloco do tabuleiro"""
+
 
 #---------- Botões --------------#
 hitbox_carta = BOTAO_CARTA.get_rect(topleft=(0, 0))
