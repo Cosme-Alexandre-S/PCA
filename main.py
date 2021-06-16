@@ -5,7 +5,7 @@ import time
 
 pygame.init()
 
-
+#----------- Variáveis --------------#
 WIDTH, HEIGHT = 1024, 740
 TELA = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Tabuleiro", "Perguntas")
@@ -28,7 +28,6 @@ BLOCK_0 = pygame.image.load(os.path.join("assets", "ISO_GRASS.png"))
 CROWD = pygame.image.load(os.path.join("assets", "crowd.png"))
 PLAYER = pygame.image.load(os.path.join("assets", "ping_1.png"))
 PLAYER_1 = pygame.image.load(os.path.join("assets", "ping.png"))
-PLAYER_2 = pygame.image.load(os.path.join("assets", "ping_2.png"))
 BOTAO_CARTA = pygame.image.load(os.path.join("assets", "carta.png"))
 MASKGUI = pygame.image.load(os.path.join("assets", "maskgui.png"))
 cartabckground = pygame.image.load(os.path.join("assets", "cartabackground.png"))
@@ -39,12 +38,9 @@ fundo_aviso = pygame.image.load(os.path.join("assets", "fundoendgame.png"))
 pos_foco_camera = [int(WIDTH / 2 - BLOCK.get_width() / 2), int(HEIGHT / 2 - BLOCK.get_height() / 2)]
 """Variável que define as coordenadas do centro da tela levando em consideração o tamanho de um Bloco do tabuleiro"""
 
-
 #---------- Botões --------------#
 hitbox_carta = BOTAO_CARTA.get_rect(topleft=(0, 0))
 
-#---------- Temporário --------------#
-pos_foco_camera = [int(WIDTH / 2 - BLOCK.get_width() / 2), int(HEIGHT / 2 - BLOCK.get_height() / 2)]
 
 #______Centralização de objetos na tela e funcoes basicas_______#
 def center_y(object):
@@ -77,15 +73,15 @@ x0, y0 = 0,0 # Valores iniciais de referência para os axis x e y
 coord_mapa_comp = []  # Lista para guardar todas as coordenadas e montar o MAPA
 coord_mapa_path = []  # Guarda todos os caminhos do MAPA
 MAPA = [
-    (0, 0, 0, 0, 0, 0, 0, 0, 0),
-    (0, 8, 9, 10, 0, 23, 24, 25, 0),
-    (0, 7, 0, 11, 0, 22, 0, 26, 0),
-    (0, 6, 0, 12, 0, 21, 0, 27, 0),
-    (0, 5, 0, 12, 0, 20, 0, 28, 0),
-    (0, 4, 0, 13, 0, 19, 0, 29, 0),
-    (0, 3, 0, 14, 0, 18, 0, 30, 0),
-    (0, 2, 0, 15, 16, 17, 0, 31, 0),
-    (0, 1, 0, 0, 0, 0, 0, 32, 0)]
+    (0, 0, 0, 0, 0, 0, 0),
+    (0, 8, 9, 10, 0, 0, 0),
+    (0, 7, 0, 11, 0, 0, 0),
+    (0, 6, 0, 12, 0, 0, 0, ),
+    (0, 5, 0, 12, 0, 20, 21),
+    (0, 4, 0, 13, 0, 19, 0),
+    (0, 3, 0, 14, 0, 18, 0),
+    (0, 2, 0, 15, 16, 17, 0),
+    (0, 1, 0, 0, 0, 0, 0)]
 
 # Ciclo para criar a lista de coordenadas
 for row in MAPA:
@@ -279,7 +275,7 @@ class Jogador(pygame.sprite.Sprite):
     nome: object
     jog = 0
     posicao_relativa = [0,0]
-    ICONES = [PLAYER,PLAYER_1,PLAYER_2]
+    ICONES = [PLAYER,PLAYER_1]
 
     def __init__(self, nome, icon):
         pygame.sprite.Sprite.__init__(self)
@@ -307,11 +303,6 @@ icones_jogadores = pygame.sprite.Group()
 
 #---------- Funções --------------#
 
-def poligono_mapa(coordenadas, scroll): #Constroi os poligonos para interação
-    for o in coordenadas:
-        pygame.draw.polygon(TELA, (30, 30, 30), [[5 + o[1] + scroll[0], 35 + o[2] + scroll[1]], (60 + o[1] + scroll[0], 2 + o[2] + scroll[1]), (118 + o[1] + scroll[0], 35 + o[2] + scroll[1]), (61 + o[1] + scroll[0], 68 + o[2] + scroll[1])])
-
-
 def construtor(coordenadas, scroll, crowding):
     for i in coordenadas:
         if i[0] > 0:
@@ -329,7 +320,8 @@ def centralizar_camera_personagem(foco):
     return [x,y]
 
 
-def aglomeracao(rodadas, caminhos): # Adiciona uma quantidade crescente de casas aglomeradas
+def aglomeracao(rodadas, caminhos):
+    # A variavel "rodadas" adiciona uma quantidade crescente de casas aglomeradas
     if rodadas > 2 and not rodadas % 2 == 0:
         aglomerados = int(rodadas / 2) + 3
         aglomeracoes = []
@@ -338,7 +330,7 @@ def aglomeracao(rodadas, caminhos): # Adiciona uma quantidade crescente de casas
             aglomeracoes.append(buffer[0])
         print(aglomeracoes)
 
-        return aglomeracoes
+        return aglomeracoes # Retorna uma lista com todas as casas aglomeradas
     else:
         return []
 
@@ -348,8 +340,6 @@ def endgame(Lista_Jogador, Cartas):
     # Se as cartas acabarem o mais proximo do fim ganha
     # Se um ficar contaminado (Perde)
     # Se os dois ficarem contaminados (Ambos perdem. Game Over)
-    # badending = pygame.image.load(os.path.join("assets", "badending.png"))
-    # fundo_aviso = pygame.image.load(os.path.join("assets", "fundoendgame.png"))
 
     def tela_fim_de_jogo (winner = None, mensagem = "Você Foi imunizado"):
         run = True
@@ -404,16 +394,20 @@ def endgame(Lista_Jogador, Cartas):
         vencedor = nao_contaminado[0]
         tela_fim_de_jogo(vencedor,f"Infelizmente o {contaminado[0]} ficou sem máscara e foi contaminado.")
 
-    if len(Cartas) == 0:
+    if len(Cartas) == 0: # Se as perguntas acabarem o jogo acaba
         distancia = 0
+        mensagem_vitoria = f"Os dois suportaram até o fim"
         for jogador in Lista_Jogador:
             if jogador.posicao[0] > distancia:
                 distancia = jogador.posicao[0] + len(jogador.cartas)
                 vencedor = jogador
+                mensagem_vitoria = f"Os dois suportaram até o fim e {vencedor} foi imunizado"
+
 
             elif jogador.posicao[0] == distancia:
                 vencedor = "aos dois Jogadores"
-        tela_fim_de_jogo(vencedor, "Os dois suportaram até o fim e foram imunizados!")
+                mensagem_vitoria = "Os dois suportaram até o fim e foram imunizados!"
+        tela_fim_de_jogo(vencedor,mensagem_vitoria )
 
 
 
@@ -510,7 +504,6 @@ def mainloop():
 
                 # ----------- Interface Gráfica -----------#
                 TELA.fill(CORBACKGROUND)  # refresh do fundo
-                poligono_mapa(coord_mapa_path, scrolling)
                 construtor(coord_mapa_comp, scrolling, evento)
                 for jogador in lobby:
                     TELA.blit(jogador.image, [jogador.posicao[1] + scrolling[0] + 40, jogador.posicao[2] + scrolling[1] - 40])
