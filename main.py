@@ -70,7 +70,7 @@ def Touch(item, ponto):
         return False
 
 
-#---------- Vars para o gerador de mapas --------------#
+#---------- Variáveis para o gerador de mapas --------------#
 inc_y = 35  # Distância em y de um tile ao outro
 inc_x = 60 # Distância em x de um tile ao outro
 x0, y0 = 0,0 # Valores iniciais de referência para os axis x e y
